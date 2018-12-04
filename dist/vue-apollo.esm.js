@@ -770,17 +770,10 @@ function (_SmartApollo) {
   }, {
     key: "executeApollo",
     value: function executeApollo(variables) {
-      var variablesJson = JSON.stringify(variables);
-
       if (this.sub) {
-        if (variablesJson === this.previousVariablesJson) {
-          return;
-        }
-
         this.sub.unsubscribe();
-      }
+      } // Create observer
 
-      this.previousVariablesJson = variablesJson; // Create observer
 
       this.observer = this.vm.$apollo.watchQuery(this.generateApolloOptions(variables));
       this.startQuerySubscription();
